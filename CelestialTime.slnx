@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CelestialTime.DemoConsole/CelestialTime.DemoConsole.csproj" Id="e1ca92bc-8f8f-4fc7-9859-3432fc6e087b" />
+  <Project Path="CelestialTime/CelestialTime.csproj" />
+</Solution>

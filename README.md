@@ -1,2 +1,4 @@
 # CelestialTime
-A lightweight C# astronomy library that extends DateTime with intuitive solar and lunar calculations—providing readable, location-aware insights such as sun events, moon phases, and eclipses from any moment in time.
+
+CelestialTime is a C# class library that provides deterministic solar and lunar calculations based on a given DateTime and geographic location.
+It exposes a set of DateTime extension methods and immutable data models to compute sun events (sunrise, sunset, day/night length), moon phases, lunar age, illumination, and approximate eclipse timing with a clean, expressive API.
