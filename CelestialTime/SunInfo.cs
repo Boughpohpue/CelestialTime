@@ -67,10 +67,10 @@ public class SunInfo
         sb.AppendLine($"Night length:   {NightLength.ToNiceString()}");
         sb.AppendLine($"Sunrise time:   {SunriseTime.ToShortTimeString()}");
         sb.AppendLine($"Sunset time:    {SunsetTime.ToShortTimeString()}");
-        sb.AppendLine($"Last sunrise:   {SinceLastSunrise.ToNiceString()}");
-        sb.AppendLine($"Next sunrise:   {ToNextSunrise.ToNiceString()}");
-        sb.AppendLine($"Last sunset:    {SinceLastSunset.ToNiceString()}");
-        sb.AppendLine($"Next sunset:    {ToNextSunset.ToNiceString()}");
+        sb.AppendLine($"Last sunrise:   {SinceLastSunrise.ToNiceString()} ago");
+        sb.AppendLine($"Next sunrise:   in {ToNextSunrise.ToNiceString()}");
+        sb.AppendLine($"Last sunset:    {SinceLastSunset.ToNiceString()} ago");
+        sb.AppendLine($"Next sunset:    in {ToNextSunset.ToNiceString()}");
         sb.AppendLine($"Last eclipse:   {LastEclipse.ToShortDateString()}, {(int)SinceLastEclipse.TotalDays}d ago");
         sb.AppendLine($"Next eclipse:   {NextEclipse.ToShortDateString()}, in {(int)ToNextEclipse.TotalDays}d");
         return sb.ToString();

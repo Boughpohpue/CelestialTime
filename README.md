@@ -46,37 +46,53 @@ Install-Package Infertus.CelestialTime
 
 ## Usage
 
-** Basic example
+**Basic example**
 
+```C#
 using CelestialTime;
 using System;
 
 
-var place = new PlaceInfo(45.42, -75.69, "Ottawa, Canada");
+var place = new PlaceInfo(52.234528, 20.991954, "Warszawa, Poland");
 var moment = new CelestialMoment(DateTime.Now, place);
 
 Console.WriteLine(moment.SunInfo.ToString());
 Console.WriteLine(moment.MoonInfo.ToString());
+```
 
-
-** Sample output:
+**Sample output:**
 
 SUN INFO:
-Local time: 1/22/2026 12:16 PM
-Day length: 9h 21m
-Sunrise: 7:34 AM
-Sunset: 4:55 PM
-Next eclipse: 2/17/2026, in 25d
+Info time:      1/23/2026 6:08:26 AM
+Local time:     1/23/2026 6:08:26 AM
+Day of year:    23
+Day length:     8h 35m
+Night length:   15h 24m
+Sunrise time:   7:30 AM
+Sunset time:    4:06 PM
+Last sunrise:   22h 36m ago
+Next sunrise:   in 1h 21m
+Last sunset:    14h 3m ago
+Next sunset:    in 9h 57m
+Last eclipse:   9/21/2025, 124d ago
+Next eclipse:   2/17/2026, in 24d
 
 MOON INFO:
-Phase: Waxing Crescent
-Age: 4d 9h 38m
-Illumination: 14.91%
-Next full moon: 2/2/2026, in 10d 8h
+Info time:      1/23/2026 6:08:26 AM
+Age:            4d 21h 30m (16.58%)
+Phase:          Waxing crescent
+Illumination:   33.16%
+Last new moon:  1/18/2026 8:38:14 AM, 4d 21h 30m ago
+Next new moon:  2/16/2026 9:22:17 PM, in 24d 15h 13m
+Last full moon: 1/3/2026 2:16:12 PM, 19d 15h 52m ago
+Next full moon: 2/2/2026 3:00:15 AM, in 9d 20h 51m
+Last eclipse:   9/7/2025, 138d 6h 8m ago
+Next eclipse:   3/3/2026, in 38d 17h 51m
 
 
-** Multiple locations
+**Multiple locations**
 
+```C#
 var places = new List<PlaceInfo>
 {
     new PlaceInfo(53.435719, 14.521007, "Szczecin, Poland"),
@@ -88,7 +104,7 @@ foreach (var p in places)
     var cm = new CelestialMoment(now, p);
     Console.WriteLine(cm.ToString());
 }
-
+```
 
 This will output sun and moon data for each location, including rise/set times, moon phase, and eclipse information.
 
@@ -96,7 +112,7 @@ This will output sun and moon data for each location, including rise/set times, 
 
 # API Overview
 
-** DateTime extension methods
+**DateTime extension methods**
 
 GetSunrise(latitude, longitude)
 
@@ -107,7 +123,7 @@ IsSolarEclipse(), GetNextSolarEclipse(), GetLastSolarEclipse()
 IsLunarEclipse(), GetMoonPhase(), GetMoonAgePercent(), GetMoonIllumination(), etc.
 
 
-** Data models
+**Data models**
 
 PlaceInfo – represents a location
 
