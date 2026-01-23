@@ -1,6 +1,6 @@
 ﻿namespace CelestialTime;
 
-public enum LunarPhase
+public enum MoonPhase
 {
     NewMoon = 0,
     WaxingCrescent = 1,

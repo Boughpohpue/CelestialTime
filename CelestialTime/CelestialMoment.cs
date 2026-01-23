@@ -1,21 +1,30 @@
-﻿using System.Text;
+﻿using Infertus.Geo.Primitives;
+using System.Text;
 
 namespace CelestialTime;
 
 public class CelestialMoment
 {
+    public DateTime Moment { get; init; }
+    public SunInfo SunInfo { get; init; }
+    public MoonInfo MoonInfo { get; init; }
     public PlaceInfo PlaceInfo { get; init; }
-    public SolInfo SunInfo { get; init; }
-    public LunaInfo MoonInfo { get; init; }
+
 
     public CelestialMoment(DateTime dt, PlaceInfo placeInfo)
     {
+        Moment = dt;
+        SunInfo = new SunInfo(dt, placeInfo.Coordinates);
+        MoonInfo = new MoonInfo(dt);
         PlaceInfo = placeInfo;
-        SunInfo = new SolInfo(dt, placeInfo.Latitude, placeInfo.Longitude);
-        MoonInfo = new LunaInfo(dt);
     }
+
+    public CelestialMoment(DateTime dt, Coordinates coordinates, string placeName = "")
+        : this(dt, new PlaceInfo(coordinates, placeName)) { }
+
     public CelestialMoment(DateTime dt, double latitude = 0.0, double longitude = 0.0, string placeName = "")
         : this(dt, new PlaceInfo(latitude, longitude, placeName)) { }
+
 
     public override string ToString()
     {

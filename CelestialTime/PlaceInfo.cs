@@ -1,26 +1,30 @@
-﻿using System.Text;
+﻿using Infertus.Geo.Primitives;
+using System.Text;
 
 namespace CelestialTime;
 
 public class PlaceInfo
 {
     public string Name { get; set; }
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
+    public Coordinates Coordinates { get; set; }
 
-    public PlaceInfo(double latitude = 0.0, double longitude = 0.0, string name = "")
+
+    public PlaceInfo(Coordinates coordinates, string name = "")
     {
         Name = name;
-        Latitude = latitude; 
-        Longitude = longitude; 
+        Coordinates = coordinates;
     }
+
+    public PlaceInfo(double latitude = 0.0, double longitude = 0.0, string name = "")
+        : this(new Coordinates(latitude, longitude), name) { }
+
 
     public override string ToString()
     {
         var sb = new StringBuilder();
         if (!string.IsNullOrWhiteSpace(Name)) sb.AppendLine(Name);
-        sb.AppendLine($"{Latitude}, {Longitude}");
-        sb.AppendLine($"{Angle.DegToDms(Latitude, 'N', 'S')}, {Angle.DegToDms(Longitude, 'E', 'W')}");
+        sb.AppendLine(Coordinates.ToDecimalString());
+        sb.AppendLine(Coordinates.ToDmsString());
         return sb.ToString();
     }
 }

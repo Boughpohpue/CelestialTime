@@ -9,7 +9,7 @@ public static class EclipseHelper
     public static double GetMoonNodeAge(DateTime dt)
     {
         // Get fractional position of Moon along node cycle (0 = ascending node)
-        double nodePhase = ((dt - LunaInfo.AscendingNodeKnownDate).TotalDays / DraconicMonth) % 1.0;
+        double nodePhase = ((dt - MoonInfo.KnownAscendingNodeDate).TotalDays / DraconicMonth) % 1.0;
 
         if (nodePhase < 0) nodePhase += 1.0;
 
@@ -28,7 +28,7 @@ public static class EclipseHelper
     }
     public static double GetFullMoonScore(DateTime dt, double weight = FullMoonScoreWeight)
     {
-        return Math.Abs(dt.GetMoonAge() - LunaInfo.MaxAge / 2) * weight;
+        return Math.Abs(dt.GetMoonAge() - MoonInfo.MaxAge / 2) * weight;
     }
     public static double GetEclipseScore(DateTime dt)
     {

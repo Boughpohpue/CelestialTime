@@ -1,4 +1,5 @@
 ﻿using GeoTimeZone;
+using Infertus.Geo.Primitives;
 using TimeZoneConverter;
 
 namespace CelestialTime;
@@ -16,4 +17,7 @@ public static class TimeZoneHelper
             return TimeZoneInfo.Local;
         }
     }
+
+    public static TimeZoneInfo GetTimeZoneInfo(Coordinates coordinates) => 
+        GetTimeZoneInfo(coordinates.Lat, coordinates.Lon);
 }

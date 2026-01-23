@@ -4,27 +4,9 @@ public static class DateTimeSolarExtensions
 {
     public const double EclipseToleranceDays = 0.69;
 
-    public static DateTime GetSunrise(this DateTime dt, double latitude, double longitude)
-    {
-        var sunEventTime = dt.CalculateSunEvent(latitude, longitude, SolarEvent.Sunrise);
-        if (sunEventTime.Date > dt.Date)
-        {
-            sunEventTime = dt.AddDays(-1).CalculateSunEvent(latitude, longitude, SolarEvent.Sunrise);
-        }
-        return sunEventTime;
-    }
-    public static DateTime GetSunset(this DateTime dt, double latitude, double longitude)
-    {
-        var sunEventTime = dt.CalculateSunEvent(latitude, longitude, SolarEvent.Sunset);
-        if (sunEventTime.Date < dt.Date)
-        {
-            sunEventTime = dt.AddDays(1).CalculateSunEvent(latitude, longitude, SolarEvent.Sunset);
-        }
-        return sunEventTime;
-    }
     public static bool IsSolarEclipse(this DateTime dt)
     {
-        return dt.GetMoonPhase() == LunarPhase.NewMoon
+        return dt.GetMoonPhase() == MoonPhase.NewMoon
             && EclipseHelper.IsNearMoonNode(dt, EclipseToleranceDays);
     }
     public static DateTime GetLastSolarEclipse(this DateTime dt)
@@ -46,7 +28,26 @@ public static class DateTimeSolarExtensions
         return eclipseDate;
     }
 
-    private static DateTime CalculateSunEvent(this DateTime date, double latitude, double longitude, SolarEvent sunEvent)
+    public static DateTime GetSunriseTime(this DateTime dt, double latitude = 0.0, double longitude = 0.0)
+    {
+        var sunEventTime = dt.CalculateSunEventTime(latitude, longitude, SunEvent.Sunrise);
+        if (sunEventTime.Date > dt.Date)
+        {
+            sunEventTime = dt.AddDays(-1).CalculateSunEventTime(latitude, longitude, SunEvent.Sunrise);
+        }
+        return sunEventTime;
+    }
+    public static DateTime GetSunsetTime(this DateTime dt, double latitude = 0.0, double longitude = 0.0)
+    {
+        var sunEventTime = dt.CalculateSunEventTime(latitude, longitude, SunEvent.Sunset);
+        if (sunEventTime.Date < dt.Date)
+        {
+            sunEventTime = dt.AddDays(1).CalculateSunEventTime(latitude, longitude, SunEvent.Sunset);
+        }
+        return sunEventTime;
+    }
+
+    private static DateTime CalculateSunEventTime(this DateTime date, double latitude, double longitude, SunEvent sunEvent)
     {
         // Get approximate time
         double lngHour = longitude / 15.0;
@@ -80,7 +81,7 @@ public static class DateTimeSolarExtensions
         if (cosH > 1) return DateTime.MinValue;  // Sun never rises
         if (cosH < -1) return DateTime.MaxValue; // Sun never sets
 
-        double H = sunEvent == SolarEvent.Sunrise
+        double H = sunEvent == SunEvent.Sunrise
             ? 360 - Angle.Rad2Deg(Math.Acos(cosH))
             : Angle.Rad2Deg(Math.Acos(cosH));
         H /= 15.0;
