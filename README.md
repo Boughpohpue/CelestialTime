@@ -62,6 +62,7 @@ Console.WriteLine(moment.MoonInfo.ToString());
 
 **Sample output:**
 
+```bash
 SUN INFO:
 Info time:      1/23/2026 6:08:26 AM
 Local time:     1/23/2026 6:08:26 AM
@@ -88,7 +89,7 @@ Last full moon: 1/3/2026 2:16:12 PM, 19d 15h 52m ago
 Next full moon: 2/2/2026 3:00:15 AM, in 9d 20h 51m
 Last eclipse:   9/7/2025, 138d 6h 8m ago
 Next eclipse:   3/3/2026, in 38d 17h 51m
-
+```
 
 **Multiple locations**
 
